@@ -1,6 +1,6 @@
 {
   "name": "viewfx",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Tailwind CSS v3/v4 plugin for View Transitions theme effects",
   "style": "./src/index.css",
   "main": "./src/plugin.cjs",
