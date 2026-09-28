@@ -2,14 +2,16 @@
 
 # ViewFX
 
-[![en](https://img.shields.io/badge/lang-en-red.svg)](./README.md)
-[![es](https://img.shields.io/badge/lang-es-yellow.svg)](./README.es.md)
 
-![GitHub stars](https://img.shields.io/github/stars/LuisitoLuis/viewfx)
-![GitHub Forks](https://img.shields.io/github/forks/LuisitoLuis/viewfx)
-![GitHub PRs](https://img.shields.io/github/issues-pr/LuisitoLuis/viewfx)
-![GitHub issues](https://img.shields.io/github/issues/LuisitoLuis/viewfx)
-![GitHub Contributors](https://img.shields.io/github/contributors/LuisitoLuis/viewfx)
+
+[![en](https://img.shields.io/badge/lang-en-ef4444?style=flat&labelColor=0a0a0a)](./README.md)
+[![es](https://img.shields.io/badge/lang-es-eab308?style=flat&labelColor=0a0a0a)](./README.es.md)
+
+[![GitHub stars](https://img.shields.io/github/stars/LuisitoLuis/viewfx?style=flat&labelColor=0a0a0a&color=eab308)](https://github.com/LuisitoLuis/viewfx/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/LuisitoLuis/viewfx?style=flat&labelColor=0a0a0a&color=3b82f6)](https://github.com/LuisitoLuis/viewfx/forks)
+[![GitHub PRs](https://img.shields.io/github/issues-pr/LuisitoLuis/viewfx?style=flat&labelColor=0a0a0a&color=22c55e)](https://github.com/LuisitoLuis/viewfx/pulls)
+[![GitHub issues](https://img.shields.io/github/issues/LuisitoLuis/viewfx?style=flat&labelColor=0a0a0a&color=ef4444)](https://github.com/LuisitoLuis/viewfx/issues)
+[![GitHub Contributors](https://img.shields.io/github/contributors/LuisitoLuis/viewfx?style=flat&labelColor=0a0a0a&color=f97316)](https://github.com/LuisitoLuis/viewfx/graphs/contributors)
 
 ![Catálogo de ViewFX](https://pub-660dca4bd13944bd8c4a80be4489c81e.r2.dev/web.webp)
 
