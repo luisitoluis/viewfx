@@ -1,7 +1,7 @@
 {
   "name": "ViewFX",
   "short_name": "ViewFX",
-  "description": "Theme transition effects for the View Transitions API",
+  "description": "ViewFX — Tailwind CSS plugin for theme toggle transitions",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f8f6f1",

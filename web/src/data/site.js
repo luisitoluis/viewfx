@@ -7,14 +7,14 @@ import { EFFECTS } from './effects'
 export const SITE = {
   url: 'https://viewfx.luismc.dev',
   name: 'ViewFX',
-  title: `Tailwind CSS Theme Transitions Plugin | ${EFFECTS.length}+ Effects`,
-  tagline: 'A specimen catalogue of dark/light theme transitions',
-  description: `Preview ${EFFECTS.length}+ Tailwind CSS theme transitions on the View Transitions API. Copy one class onto <html>.`,
+  title: 'ViewFX | Tailwind CSS Theme Toggle Plugin',
+  tagline: 'A Tailwind CSS plugin of dark/light theme toggle transitions',
+  description: `ViewFX is a Tailwind CSS plugin for dark/light theme toggles. Preview ${EFFECTS.length}+ view-transition effects and copy one class onto <html>.`,
   image: 'https://pub-660dca4bd13944bd8c4a80be4489c81e.r2.dev/og.webp',
   imageWidth: 1200,
   imageHeight: 630,
   imageAlt:
-    'ViewFX catalogue: Tailwind CSS theme transitions on the View Transitions API',
+    'ViewFX, a Tailwind CSS plugin for theme toggle transitions on the View Transitions API',
   locale: 'en',
   ogLocale: 'en_US',
   twitter: '',

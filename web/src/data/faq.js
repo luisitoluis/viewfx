@@ -4,7 +4,7 @@ import { EFFECTS } from './effects'
 export const FAQ = [
   {
     q: 'What is ViewFX?',
-    a: `An open-source Tailwind CSS plugin that ships ${EFFECTS.length} dark/light theme transitions on the native View Transitions API. Put one class on <html> and wrap your theme toggle in document.startViewTransition — no custom keyframes required.`
+    a: `ViewFX is a Tailwind CSS plugin for theme toggles. It ships ${EFFECTS.length} dark/light transitions on the native View Transitions API. Put one class on <html> and wrap your theme toggle in document.startViewTransition — no custom keyframes required.`
   },
   {
     q: 'How do I install it?',
