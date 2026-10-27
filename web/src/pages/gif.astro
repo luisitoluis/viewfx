@@ -6,6 +6,7 @@ import PlayIcon from '@components/icons/play.astro'
 import CopyIcon from '@components/icons/copy.astro'
 import GifPicker from '@components/GifPicker.astro'
 import GifTiming from '@components/GifTiming.astro'
+import BackHome from '@components/ui/BackHome.astro'
 import { SITE } from '../data/site'
 import { GIF_DURATION, GIF_PRESETS } from '../data/gif.js'
 
@@ -71,6 +72,7 @@ const initialSnippet = `::view-transition-group(root) {
   <main id="main" class="pt-20 sm:pt-24" tabindex="-1">
   <div class="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6 lg:px-8">
     <div class="mb-8 max-w-2xl">
+      <BackHome />
       <p class="mb-2 font-mono text-[0.6875rem] leading-none tracking-[0.14em] text-accent-text uppercase">GIF studio</p>
       <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Wipe between two GIFs</h1>
       <p class="mt-3 max-w-xl text-base leading-relaxed text-ink-2">

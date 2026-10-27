@@ -18,7 +18,7 @@ export const EFFECTS = [
     name: 'Circle',
     desc: 'An SVG circle mask expanding from the centre of the viewport.',
     technique: 'mask',
-    durationMs: 1000,
+    durationMs: 1600,
     css: usage('circle')
   },
   {
@@ -27,7 +27,7 @@ export const EFFECTS = [
     name: 'Circle Blur',
     desc: 'The same circle, softened with an feGaussianBlur edge.',
     technique: 'mask',
-    durationMs: 1000,
+    durationMs: 1600,
     css: usage('circle-blur')
   },
   {

@@ -6,16 +6,18 @@ module.exports = {
     '--fx-anim-old': 'none',
     '--fx-old-z': '-1',
     '--fx-mask': 'var(--mask-circle)',
-    '--fx-mask-size': '200vmax',
-    '--fx-duration': '1s'
+    '--fx-mask-size': '150vmax',
+    '--fx-duration': '1.6s',
+    '--fx-ease': 'ease-in-out'
   },
   '.circle-blur': {
     '--fx-anim': 'fx-mask-grow',
     '--fx-anim-old': 'none',
     '--fx-old-z': '-1',
     '--fx-mask': 'var(--mask-circle-blur)',
-    '--fx-mask-size': '200vmax',
-    '--fx-duration': '1s'
+    '--fx-mask-size': '170vmax',
+    '--fx-duration': '1.6s',
+    '--fx-ease': 'ease-in-out'
   },
   '.corner-tl': {
     '--fx-anim': 'fx-mask-grow',

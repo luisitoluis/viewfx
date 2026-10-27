@@ -10,7 +10,7 @@ describe('viewfx plugins', () => {
     })
 
     expect(css).toContain(
-      '.circle{--fx-anim:fx-mask-grow;--fx-anim-old:none;--fx-old-z:-1;--fx-mask:var(--mask-circle);--fx-mask-size:200vmax;--fx-duration:1s;}'
+      '.circle{--fx-anim:fx-mask-grow;--fx-anim-old:none;--fx-old-z:-1;--fx-mask:var(--mask-circle);--fx-mask-size:150vmax;--fx-duration:1.6s;--fx-ease:ease-in-out;}'
     )
     expect(css).toContain('@keyframes fx-mask-grow{to{mask-size:var(--fx-mask-size)}}')
   })
@@ -86,7 +86,7 @@ describe('viewfx plugins', () => {
     })
 
     expect(css).toContain(
-      '.circle-duration-1000-delay-300{--fx-anim:fx-mask-grow;--fx-anim-old:none;--fx-old-z:-1;--fx-mask:var(--mask-circle);--fx-mask-size:200vmax;--fx-duration:1s;--fx-duration-override:1000ms;--fx-delay:300ms;}'
+      '.circle-duration-1000-delay-300{--fx-anim:fx-mask-grow;--fx-anim-old:none;--fx-old-z:-1;--fx-mask:var(--mask-circle);--fx-mask-size:150vmax;--fx-duration:1.6s;--fx-ease:ease-in-out;--fx-duration-override:1000ms;--fx-delay:300ms;}'
     )
   })
 
