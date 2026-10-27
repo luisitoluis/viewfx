@@ -13,8 +13,7 @@ const PACKAGE_MANAGERS = [
   { name: 'npm', command: `npm install ${SITE.package}` },
   { name: 'pnpm', command: `pnpm add ${SITE.package}` },
   { name: 'yarn', command: `yarn add ${SITE.package}` },
-  { name: 'bun', command: `bun add ${SITE.package}` },
-  { name: 'dino', command: `deno add ${SITE.package}` }
+  { name: 'bun', command: `bun add ${SITE.package}` }
 ] as const
 
 const IMPORT_V4 = `@import 'tailwindcss';

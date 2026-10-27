@@ -8,7 +8,7 @@ export const FAQ = [
   },
   {
     q: 'How do I install it?',
-    a: `Run pnpm add ${SITE.package} (or npm / yarn / bun / deno), then add @import 'tailwindcss'; and @import '${SITE.package}'; to your global CSS for Tailwind v4.`
+    a: `Run pnpm add ${SITE.package} (or npm / yarn / bun), then add @import 'tailwindcss'; and @import '${SITE.package}'; to your global CSS for Tailwind v4.`
   },
   {
     q: 'Does it work with Tailwind CSS v3 and v4?',
