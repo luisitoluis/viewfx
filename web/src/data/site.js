@@ -1,4 +1,4 @@
-import { EFFECTS } from './effects'
+import { EFFECTS } from '@data/effects'
 
 /**
  * Single source of truth for site-wide metadata.

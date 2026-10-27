@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro'
-import { buildHomeMarkdown, markdownResponse } from '../lib/agent-markdown.js'
+import { buildHomeMarkdown, markdownResponse } from '@lib/agent-markdown.js'
 
 export const prerender = true
 

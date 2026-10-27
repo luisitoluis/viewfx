@@ -1,9 +1,9 @@
 ---
-import Logo from '../ui/Logo.astro'
-import GithubIcon from '../icons/github.astro'
-import ToggleTheme from '../ui/ToggleTheme.astro'
-import Enlace from '../ui/Enlace.astro'
-import { SITE } from '../../data/site'
+import Logo from '@components/ui/Logo.astro'
+import GithubIcon from '@components/icons/github.astro'
+import ToggleTheme from '@components/ui/ToggleTheme.astro'
+import Enlace from '@components/ui/Enlace.astro'
+import { SITE } from '@data/site'
 
 const isHome =
   Astro.url.pathname === '/' || Astro.url.pathname === '/index.html'

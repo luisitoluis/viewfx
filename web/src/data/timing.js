@@ -4,7 +4,7 @@
  *
  * @see https://github.com/midudev/tailwind-animations
  */
-import theme from '../../../src/theme.json'
+import theme from '@root/src/theme.json'
 
 export const ANIMATION_DURATION = theme.duration
 export const ANIMATION_DELAY = theme.delay

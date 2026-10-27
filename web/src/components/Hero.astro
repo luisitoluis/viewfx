@@ -1,13 +1,13 @@
 ---
-import Logo from './ui/Logo.astro'
-import ArrowRightIcon from './icons/arrow-right.astro'
-import CopyIcon from './icons/copy.astro'
-import PackageMark from './ui/PackageMark.astro'
-import { EFFECTS } from '../data/effects'
-import { SITE } from '../data/site'
-import { AGENT_INSTALL_PROMPT } from '../data/agent-prompt'
-import { highlight } from '../lib/highlight'
-import { version } from '../../../package.json'
+import Logo from '@components/ui/Logo.astro'
+import ArrowRightIcon from '@components/icons/arrow-right.astro'
+import CopyIcon from '@components/icons/copy.astro'
+import PackageMark from '@components/ui/PackageMark.astro'
+import { EFFECTS } from '@data/effects'
+import { SITE } from '@data/site'
+import { AGENT_INSTALL_PROMPT } from '@data/agent-prompt'
+import { highlight } from '@lib/highlight'
+import { version } from '@root/package.json'
 
 const PACKAGE_MANAGERS = [
   { name: 'npm', command: `npm install ${SITE.package}` },

@@ -1,6 +1,6 @@
-import { announce } from './live-region'
-import { toastSuccess } from '../components/toasts/toast'
-import { DEFAULT_EFFECT_ID } from '../data/effects'
+import { announce } from '@lib/live-region'
+import { toastSuccess } from '@components/toasts/toast'
+import { DEFAULT_EFFECT_ID } from '@data/effects'
 
 export const EFFECT_KEY = 'viewfx:effect'
 

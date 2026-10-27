@@ -1,5 +1,5 @@
-import { SITE } from './site'
-import { EFFECTS } from './effects'
+import { SITE } from '@data/site'
+import { EFFECTS } from '@data/effects'
 
 const classes = EFFECTS.map((effect) => `\`${effect.id}\``).join(', ')
 

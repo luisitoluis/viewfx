@@ -2,14 +2,14 @@
  * Markdown documents for AI agents that fetch the website.
  * Generated at build time as static .md endpoints.
  */
-import pkg from '../../../package.json'
-import { SITE } from '../data/site.js'
-import { EFFECTS } from '../data/effects.js'
+import pkg from '@root/package.json'
+import { SITE } from '@data/site.js'
+import { EFFECTS } from '@data/effects.js'
 import {
   ANIMATION_DELAY,
   ANIMATION_DURATION,
   ANIMATION_STEPS
-} from '../data/timing.js'
+} from '@data/timing.js'
 
 const NPM = SITE.npm
 const effects = EFFECTS.map((effect) => effect.id)

@@ -6,15 +6,15 @@ import PlayIcon from '@components/icons/play.astro'
 import CopyIcon from '@components/icons/copy.astro'
 import SearchIcon from '@components/icons/search.astro'
 import BackHome from '@components/ui/BackHome.astro'
-import { SITE } from '../data/site'
-import { EFFECTS } from '../data/effects'
-import { buildClasses } from '../lib/playground'
+import { SITE } from '@data/site'
+import { EFFECTS } from '@data/effects'
+import { buildClasses } from '@lib/playground'
 import {
   ANIMATION_DELAY,
   ANIMATION_DURATION,
   ANIMATION_STEPS,
   DEFAULT_DURATION_KEY
-} from '../data/timing'
+} from '@data/timing'
 
 const effectIds = EFFECTS.map((effect) => effect.id)
 const durations = Object.keys(ANIMATION_DURATION)
@@ -238,7 +238,7 @@ const selectClass =
 </Layout>
 
 <script>
-  import { initPlayground } from '../lib/playground'
+  import { initPlayground } from '@lib/playground'
   initPlayground()
 </script>
 

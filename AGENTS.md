@@ -10,7 +10,7 @@ pnpm workspace with two members: the root package **`viewfx`** (published to npm
 - `pnpm test` — vitest watch mode.
 - Single test file: `pnpm exec vitest run test/index.test.js`; add `-t "name substring"` for one test.
 - `pnpm emit:masks` — regenerates `src/masks.css` from `src/masks.js`. Required after any mask/SVG edit; `src/masks.css` is committed and must not be hand-edited.
-- Site: `pnpm --filter web dev` / `pnpm --filter web build`.
+- Site: `pnpm --filter web dev` / `pnpm --filter web build`. Imports inside `web/` use the tsconfig aliases `@components`, `@layouts`, `@data`, `@lib`, `@styles`, and `@root`. Root Vitest resolves the same aliases from `vitest.config.js`.
 - There is **no** lint, format, or typecheck config — don't invent one. CI (`.github/workflows/ci.yml`) does nothing but `pnpm install && pnpm test:ci` on push/PR to `main`.
 
 ## Architecture: two hand-synced plugin implementations

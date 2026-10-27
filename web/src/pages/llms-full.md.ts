@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro'
 import {
   buildLlmsFullMarkdown,
   markdownResponse
-} from '../lib/agent-markdown.js'
+} from '@lib/agent-markdown.js'
 
 export const prerender = true
 

@@ -7,8 +7,8 @@ import CopyIcon from '@components/icons/copy.astro'
 import GifPicker from '@components/GifPicker.astro'
 import GifTiming from '@components/GifTiming.astro'
 import BackHome from '@components/ui/BackHome.astro'
-import { SITE } from '../data/site'
-import { GIF_DURATION, GIF_PRESETS } from '../data/gif.js'
+import { SITE } from '@data/site'
+import { GIF_DURATION, GIF_PRESETS } from '@data/gif.js'
 
 const durations = Object.keys(GIF_DURATION)
 const sizes = ['30%', '50%', '70%', '100%', 'cover']
@@ -174,7 +174,7 @@ document.startViewTransition(switchTheme);`}
 </Layout>
 
 <script>
-  import { initGifStudio } from '../lib/gif'
+  import { initGifStudio } from '@lib/gif'
   initGifStudio()
 </script>
 
