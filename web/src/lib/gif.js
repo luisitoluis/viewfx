@@ -1,8 +1,7 @@
-import { playTransition, isDark } from './theme'
+import { isDark } from './theme'
 import { announce } from './live-region'
 import { toastSuccess } from './toast'
 import { GIF_DURATION, GIF_PRESETS, DEFAULT_GIF_ID } from '../data/gif'
-import { createGifPlayer } from './gif-player'
 
 const SIZE_KEYS = ['30%', '50%', '70%', '100%', 'cover']
 
@@ -107,12 +106,20 @@ html.gif-mask.dark {
   --fx-old-z: -1;
 }
 
-html.gif-mask.theme-swap.has-gif-mask::view-transition-group(root) {
+html.gif-mask.theme-swap.has-gif-mask::view-transition-group(root),
+html.gif-mask.theme-swap.has-gif-mask::view-transition-old(root),
+html.gif-mask.theme-swap.has-gif-mask::view-transition-new(root) {
+  animation: none !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+html.gif-mask.theme-swap.has-gif-mask::view-transition-group(gif-live) {
   animation-duration: ${duration};
   animation-timing-function: var(--expo-in);
 }
 
-html.gif-mask.theme-swap.has-gif-mask::view-transition-new(root) {
+html.gif-mask.theme-swap.has-gif-mask::view-transition-new(gif-live) {
   -webkit-mask-image: ${mask} !important;
   mask-image: ${mask} !important;
   -webkit-mask-position: center !important;
@@ -126,8 +133,7 @@ html.gif-mask.theme-swap.has-gif-mask::view-transition-new(root) {
   animation: gif-mask-scale ${duration} linear both !important;
 }
 
-html.gif-mask.theme-swap.has-gif-mask::view-transition-old(root),
-html.gif-mask.theme-swap.has-gif-mask.dark::view-transition-old(root) {
+html.gif-mask.theme-swap.has-gif-mask::view-transition-old(gif-live) {
   -webkit-mask-image: none !important;
   mask-image: none !important;
   animation: none !important;
@@ -172,11 +178,7 @@ export function initGifStudio() {
   const root = document.documentElement
   const input = document.getElementById('gif-url')
   const thumb = document.getElementById('gif-thumb')
-  const stage = document.getElementById('gif-stage')
-  const canvas = document.getElementById('gif-stage-canvas')
-  const empty = document.getElementById('gif-empty')
   const play = document.getElementById('play-btn')
-  const pauseBtn = document.getElementById('gif-pause')
   const snippet = document.getElementById('class-snippet')
   const htmlSnippet = document.getElementById('html-snippet')
   const copyClasses = document.getElementById('copy-classes')
@@ -194,9 +196,6 @@ export function initGifStudio() {
   if (
     !(input instanceof HTMLInputElement) ||
     !(thumb instanceof HTMLImageElement) ||
-    !(stage instanceof HTMLImageElement) ||
-    !(canvas instanceof HTMLCanvasElement) ||
-    !pauseBtn ||
     durationSelects.length === 0 ||
     sizeSelects.length === 0 ||
     !play ||
@@ -224,45 +223,59 @@ export function initGifStudio() {
 
   root.classList.add('gif-mask')
 
+  const live = document.getElementById('gif-live')
+  if (live && isDark()) live.classList.add('dark')
+
+  const playLive = () => {
+    if (!live) return
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const start = document.startViewTransition?.bind(document)
+    const flip = () => live.classList.toggle('dark')
+
+    if (!start || reduced) {
+      flip()
+      return
+    }
+
+    const clear = () => {
+      live.style.viewTransitionName = ''
+      root.classList.remove('theme-swap')
+    }
+
+    root.classList.add('theme-swap')
+    live.style.viewTransitionName = 'gif-live'
+
+    let transition
+    try {
+      transition = start(flip)
+    } catch {
+      flip()
+      clear()
+      return
+    }
+
+    transition?.finished.then(clear, clear)
+    for (const settled of [transition?.ready, transition?.updateCallbackDone, transition?.finished]) {
+      settled?.catch(() => {})
+    }
+  }
+
   const durationCss = () => GIF_DURATION[durationValue()] ?? '3s'
   const gifHref = () => parseGifLink(input.value)
-  const player = createGifPlayer({ canvas, img: stage })
-  let paintedHref = ''
 
   const syncClear = () => {
     clear.hidden = !input.value.trim()
   }
 
-  const syncPauseUi = () => {
-    const paused = player.paused
-    pauseBtn.setAttribute('aria-pressed', String(paused))
-    const label = pauseBtn.querySelector('[data-label]')
-    const pauseIcon = pauseBtn.querySelector('[data-pause-icon]')
-    const resumeIcon = pauseBtn.querySelector('[data-resume-icon]')
-    if (label instanceof HTMLElement) label.textContent = paused ? 'Resume' : 'Pause'
-    if (pauseIcon instanceof HTMLElement) pauseIcon.hidden = paused
-    if (resumeIcon instanceof HTMLElement) resumeIcon.hidden = !paused
-  }
-
   const paint = (href) => {
     if (!href) {
-      paintedHref = ''
-      player.stop()
       thumb.removeAttribute('src')
       thumb.hidden = true
-      if (empty) empty.hidden = false
-      syncPauseUi()
       return
     }
 
     thumb.src = href
     thumb.hidden = false
-    if (empty) empty.hidden = true
-    if (href !== paintedHref) {
-      paintedHref = href
-      void player.load(href).then(syncPauseUi)
-    }
-    syncPauseUi()
   }
 
   const syncVars = () => {
@@ -354,7 +367,7 @@ document.startViewTransition(switchTheme);`
     markGif()
     void armMask({ restart: shouldPlay }).then(() => {
       if (shouldPlay && gifHref()) {
-        playTransition(!isDark())
+        playLive()
         announce('GIF mask transition played')
       }
     })
@@ -420,21 +433,6 @@ document.startViewTransition(switchTheme);`
     announce('GIF removed')
   })
 
-  pauseBtn.addEventListener('click', () => {
-    if (!gifHref()) {
-      toastSuccess('Pick a GIF first')
-      return
-    }
-    if (player.paused) {
-      player.resume()
-      announce('GIF preview resumed')
-    } else {
-      player.pause()
-      announce('GIF preview paused')
-    }
-    syncPauseUi()
-  })
-
   play.addEventListener('click', async () => {
     const href = gifHref()
     if (!href) {
@@ -446,7 +444,7 @@ document.startViewTransition(switchTheme);`
     try {
       await armMask({ restart: true })
       await new Promise((resolve) => requestAnimationFrame(() => resolve()))
-      playTransition(!isDark())
+      playLive()
       announce('GIF mask transition played')
     } finally {
       play.disabled = false
@@ -479,11 +477,6 @@ document.startViewTransition(switchTheme);`
   thumb.addEventListener('error', () => {
     if (thumb.getAttribute('src') !== gifHref()) return
     thumb.hidden = true
-  })
-  stage.addEventListener('error', () => {
-    if (stage.getAttribute('src') !== gifHref()) return
-    stage.hidden = true
-    if (empty) empty.hidden = false
   })
 
   refresh()
