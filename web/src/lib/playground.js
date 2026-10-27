@@ -1,7 +1,7 @@
 import { EFFECTS } from '../data/effects'
 import { isDark } from './theme'
 import { announce } from './live-region'
-import { toastSuccess } from './toast'
+import { toastSuccess } from '../components/toasts/toast'
 
 const EFFECT_IDS = new Set(EFFECTS.map((effect) => effect.id))
 const EFFECT_IDS_BY_LENGTH = [...EFFECT_IDS].sort((a, b) => b.length - a.length)

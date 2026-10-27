@@ -1,4 +1,4 @@
-import { toastSuccess } from './toast'
+import { toastSuccess } from '../components/toasts/toast'
 
 const RESET_DELAY = 2000
 

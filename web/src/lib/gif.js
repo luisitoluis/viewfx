@@ -1,6 +1,6 @@
 import { isDark } from './theme'
 import { announce } from './live-region'
-import { toastSuccess } from './toast'
+import { toastSuccess } from '../components/toasts/toast'
 import { GIF_DURATION, GIF_PRESETS, DEFAULT_GIF_ID } from '../data/gif'
 
 const SIZE_KEYS = ['30%', '50%', '70%', '100%', 'cover']
