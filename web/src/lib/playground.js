@@ -1,5 +1,5 @@
 import { EFFECTS } from '../data/effects'
-import { playTransition } from './theme'
+import { isDark } from './theme'
 import { announce } from './live-region'
 import { toastSuccess } from './toast'
 
@@ -69,7 +69,44 @@ export function applyHtmlClasses(state) {
 
 function playSelectedEffect(state) {
   applyHtmlClasses(state)
-  playTransition()
+  playScoped()
+}
+
+function playScoped() {
+  const live = document.getElementById('fx-live')
+  const root = document.documentElement
+  if (!live) return
+
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const start = document.startViewTransition?.bind(document)
+  const flip = () => live.classList.toggle('dark')
+
+  if (!start || reduced) {
+    flip()
+    return
+  }
+
+  const clear = () => {
+    live.style.viewTransitionName = ''
+    root.classList.remove('theme-swap', 'fx-preview')
+  }
+
+  root.classList.add('theme-swap', 'fx-preview')
+  live.style.viewTransitionName = 'fx-live'
+
+  let transition
+  try {
+    transition = start(flip)
+  } catch {
+    flip()
+    clear()
+    return
+  }
+
+  transition?.finished.then(clear, clear)
+  for (const settled of [transition?.ready, transition?.updateCallbackDone, transition?.finished]) {
+    settled?.catch(() => {})
+  }
 }
 
 function flashLabel(button, message) {
@@ -108,6 +145,9 @@ export function initPlayground(rootId = 'playground') {
   duration.value = state.d
   delay.value = state.delay
   steps.value = state.s
+
+  const live = document.getElementById('fx-live')
+  if (live && isDark()) live.classList.add('dark')
 
   const updateSnippet = () => {
     const classes = buildClasses(state)

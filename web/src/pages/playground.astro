@@ -83,35 +83,15 @@ const selectClass =
           </button>
         </div>
 
-        <div class="relative flex flex-1 items-center justify-center overflow-hidden p-8 sm:p-12">
-          <div
-            class="pointer-events-none absolute inset-0 opacity-40"
-            style="background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 32px 32px;"
-            aria-hidden="true"
-          >
-          </div>
-
-          <div class="relative z-10 w-full max-w-md overflow-hidden rounded-2xl border border-line bg-paper shadow-xl">
-            <div class="flex items-center gap-2 border-b border-line px-4 py-3">
-              <span class="size-2.5 rounded-full bg-line-strong" aria-hidden="true"></span>
-              <span class="size-2.5 rounded-full bg-line-strong" aria-hidden="true"></span>
-              <span class="size-2.5 rounded-full bg-line-strong" aria-hidden="true"></span>
-              <span class="ml-2 truncate font-mono text-[11px] text-ink-3">app.example</span>
-            </div>
-            <div class="grid gap-4 p-5 sm:grid-cols-[7rem_1fr]">
-              <div class="hidden rounded-xl bg-inset sm:block" aria-hidden="true"></div>
-              <div>
-                <p class="text-sm font-bold text-ink">Theme surface</p>
-                <p class="mt-1 text-xs leading-relaxed text-ink-2">
-                  Play toggles <code class="font-mono">.dark</code> on{' '}
-                  <code class="font-mono">&lt;html&gt;</code> with your classes. The wipe runs on
-                  the whole page, including this mock.
-                </p>
-                <div class="mt-4 grid grid-cols-2 gap-2" aria-hidden="true">
-                  <div class="h-16 rounded-lg bg-inset"></div>
-                  <div class="h-16 rounded-lg bg-inset"></div>
-                </div>
-              </div>
+        <div id="fx-live" class="relative flex min-h-[21.375rem] flex-1 flex-col overflow-hidden bg-paper">
+          <div class="flex flex-1 flex-col justify-center gap-4 p-6 sm:p-8">
+            <p class="text-sm font-bold text-ink">Theme</p>
+            <p class="max-w-sm text-xs leading-relaxed text-ink-2">
+              Play toggles light and dark on this surface. The effect runs here.
+            </p>
+            <div class="grid max-w-sm grid-cols-2 gap-2" aria-hidden="true">
+              <div class="h-16 rounded-lg bg-inset"></div>
+              <div class="h-16 rounded-lg bg-surface"></div>
             </div>
           </div>
         </div>
@@ -265,5 +245,111 @@ const selectClass =
     background: color-mix(in oklab, var(--accent) 14%, var(--inset));
     color: var(--accent-text);
     font-weight: 600;
+  }
+
+  #fx-live {
+    color-scheme: light;
+    --paper: #f9f7f3;
+    --surface: #ffffff;
+    --inset: #f2f0ea;
+    --ink: #10141b;
+    --ink-2: #4f5359;
+    --ink-3: #7d8086;
+    --line: #d6d9de;
+    --line-strong: #b3b8bf;
+  }
+
+  #fx-live.dark {
+    color-scheme: dark;
+    --paper: #0b0e15;
+    --surface: #12171f;
+    --inset: #191e28;
+    --ink: #f1f3f7;
+    --ink-2: #aaaeb6;
+    --ink-3: #82868e;
+    --line: #282e38;
+    --line-strong: #454e5b;
+  }
+</style>
+
+<style is:global>
+  html.fx-preview.theme-swap::view-transition-group(root),
+  html.fx-preview.theme-swap::view-transition-old(root),
+  html.fx-preview.theme-swap::view-transition-new(root) {
+    animation: none !important;
+    mask: none !important;
+    -webkit-mask: none !important;
+  }
+
+  html.fx-preview.theme-swap::view-transition-group(fx-live) {
+    animation-duration: var(--fx-duration-override, var(--fx-duration, 0.5s));
+    animation-timing-function: var(--fx-ease-override, var(--fx-ease, var(--expo-out)));
+    animation-delay: var(--fx-delay, 0s);
+  }
+
+  html.fx-preview.theme-swap::view-transition-old(fx-live) {
+    animation: var(--fx-anim-old, fx-fade-out)
+      var(--fx-duration-override, var(--fx-duration, 0.5s))
+      var(--fx-ease-override, var(--fx-ease, var(--expo-out)))
+      var(--fx-delay, 0s) both;
+    z-index: var(--fx-old-z, auto);
+    mix-blend-mode: normal;
+  }
+
+  html.fx-preview.theme-swap::view-transition-new(fx-live) {
+    mask: var(--fx-mask, none) var(--fx-mask-position, center) / 0 no-repeat;
+    mask-origin: content-box;
+    animation: var(--fx-anim, fx-fade-in)
+      var(--fx-duration-override, var(--fx-duration, 0.5s))
+      var(--fx-ease-override, var(--fx-ease, var(--expo-out)))
+      var(--fx-delay, 0s) both;
+    mix-blend-mode: normal;
+  }
+
+  html.fx-preview.theme-swap.mosaic::view-transition-new(fx-live),
+  html.fx-preview.theme-swap[class*='mosaic-duration']::view-transition-new(fx-live) {
+    mask: none;
+    -webkit-mask-image:
+      repeating-linear-gradient(
+        #0000 0,
+        #0000 calc(6.25% - var(--fx-mosaic) * 8%),
+        #fff calc(6.25% - var(--fx-mosaic) * 6.6%),
+        #fff calc(6.25% + var(--fx-mosaic) * 6.6%),
+        #0000 calc(6.25% + var(--fx-mosaic) * 8%),
+        #0000 12.5%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        #0000 0,
+        #0000 calc(6.25% - var(--fx-mosaic) * 8%),
+        #fff calc(6.25% - var(--fx-mosaic) * 6.6%),
+        #fff calc(6.25% + var(--fx-mosaic) * 6.6%),
+        #0000 calc(6.25% + var(--fx-mosaic) * 8%),
+        #0000 12.5%
+      );
+    mask-image:
+      repeating-linear-gradient(
+        #0000 0,
+        #0000 calc(6.25% - var(--fx-mosaic) * 8%),
+        #fff calc(6.25% - var(--fx-mosaic) * 6.6%),
+        #fff calc(6.25% + var(--fx-mosaic) * 6.6%),
+        #0000 calc(6.25% + var(--fx-mosaic) * 8%),
+        #0000 12.5%
+      ),
+      repeating-linear-gradient(
+        90deg,
+        #0000 0,
+        #0000 calc(6.25% - var(--fx-mosaic) * 8%),
+        #fff calc(6.25% - var(--fx-mosaic) * 6.6%),
+        #fff calc(6.25% + var(--fx-mosaic) * 6.6%),
+        #0000 calc(6.25% + var(--fx-mosaic) * 8%),
+        #0000 12.5%
+      );
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
   }
 </style>
