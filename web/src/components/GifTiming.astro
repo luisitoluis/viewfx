@@ -1,40 +1,46 @@
 ---
 interface Props {
-  durationId: string
-  sizeId: string
   duration: string
   size: string
   durations: string[]
   sizes: string[]
-  selectClass: string
 }
 
-const { durationId, sizeId, duration, size, durations, sizes, selectClass } = Astro.props
+const { duration, size, durations, sizes } = Astro.props
+
+const selectClass =
+  'w-full min-h-11 rounded-xl border border-line bg-surface px-3 text-sm text-ink focus-visible:border-accent'
 ---
 
-<div class="grid gap-3">
-  <label class="block">
-    <span class="mb-1.5 block text-xs font-semibold tracking-wide text-ink-3 uppercase">Duration</span>
-    <select id={durationId} class={`ctrl-duration ${selectClass}`}>
-      {
-        durations.map((key) => (
-          <option value={key} selected={key === duration}>
-            {key}
-          </option>
-        ))
-      }
-    </select>
-  </label>
-  <label class="block">
-    <span class="mb-1.5 block text-xs font-semibold tracking-wide text-ink-3 uppercase">Mask size</span>
-    <select id={sizeId} class={`ctrl-size ${selectClass}`}>
-      {
-        sizes.map((key) => (
-          <option value={key} selected={key === size}>
-            {key}
-          </option>
-        ))
-      }
-    </select>
-  </label>
+<div class="rounded-2xl border border-line bg-surface p-4">
+  <div class="grid gap-3">
+    <label class="block">
+      <span class="mb-1.5 block text-xs font-semibold tracking-wide text-ink-3 uppercase">
+        Duration
+      </span>
+      <select id="ctrl-duration" class:list={['ctrl-duration', selectClass]}>
+        {
+          durations.map((key) => (
+            <option value={key} selected={key === duration}>
+              {key}
+            </option>
+          ))
+        }
+      </select>
+    </label>
+    <label class="block">
+      <span class="mb-1.5 block text-xs font-semibold tracking-wide text-ink-3 uppercase">
+        Mask size
+      </span>
+      <select id="ctrl-size" class:list={['ctrl-size', selectClass]}>
+        {
+          sizes.map((key) => (
+            <option value={key} selected={key === size}>
+              {key}
+            </option>
+          ))
+        }
+      </select>
+    </label>
+  </div>
 </div>

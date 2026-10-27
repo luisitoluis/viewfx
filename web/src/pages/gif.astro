@@ -5,7 +5,6 @@ import Footer from '@components/layout/Footer.astro'
 import PlayIcon from '@components/icons/play.astro'
 import PauseIcon from '@components/icons/pause.astro'
 import CopyIcon from '@components/icons/copy.astro'
-import CloseIcon from '@components/icons/close.astro'
 import GifPicker from '@components/GifPicker.astro'
 import GifTiming from '@components/GifTiming.astro'
 import { SITE } from '../data/site'
@@ -30,9 +29,6 @@ const initial = {
   size: pick('size', sizes, '50%'),
   gif: gifFromQuery || GIF_PRESETS.find((gif) => gif.id === initialId)?.href || ''
 }
-
-const selectClass =
-  'w-full min-h-11 rounded-xl border border-line bg-surface px-3 text-sm text-ink focus-visible:border-accent'
 
 const initialDuration = GIF_DURATION[initial.d as keyof typeof GIF_DURATION] ?? '3s'
 const initialHold = initial.size === 'cover' || initial.size === '100%' ? '100vmax' : `${initial.size.replace('%', '')}vmax`
@@ -74,209 +70,137 @@ const initialSnippet = `::view-transition-group(root) {
 >
   <Header />
   <main id="main" class="pt-20 sm:pt-24" tabindex="-1">
-    <div class="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6 lg:px-8">
-      <div class="mb-8 max-w-2xl">
-        <p class="mb-2 font-mono text-[0.6875rem] leading-none tracking-[0.14em] text-accent-text uppercase">
-          GIF studio
-        </p>
-        <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Wipe between two GIFs</h1>
-        <p class="mt-3 max-w-xl text-base leading-relaxed text-ink-2">
-          Pick a GIF, tune duration and mask size, then Play. The GIF masks
-          {' '}
-          <code class="font-mono text-[0.95em]">::view-transition-new(root)</code>
-          {' '}
-          while
-          {' '}
-          <code class="font-mono text-[0.95em]">.dark</code>
-          {' '}
-          toggles. Paste any https link if you want your own file.
-        </p>
-      </div>
+  <div class="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-6 lg:px-8">
+    <div class="mb-8 max-w-2xl">
+      <p class="mb-2 font-mono text-[0.6875rem] leading-none tracking-[0.14em] text-accent-text uppercase">GIF studio</p>
+      <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">Wipe between two GIFs</h1>
+      <p class="mt-3 max-w-xl text-base leading-relaxed text-ink-2">
+        Pick a GIF, tune duration and mask size, play it on the real View Transitions API, then
+        copy the CSS or share the URL.
+      </p>
+    </div>
 
-      <div class="lg:min-h-[calc(100dvh+10rem)]">
-      <div
-        id="gif-studio"
-        class="grid gap-6 lg:sticky lg:top-24 lg:z-10 lg:max-h-[calc(100dvh-6.5rem)] lg:grid-cols-[minmax(0,1fr)_minmax(18rem,22rem)] lg:items-stretch lg:self-start lg:overflow-hidden lg:bg-paper xl:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)]"
+    <div
+      id="gif-studio"
+      class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,22rem)] lg:items-start xl:grid-cols-[minmax(0,1fr)_minmax(20rem,24rem)]"
+    >
+      <section
+        class="flex min-h-112 flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-sm"
+        aria-label="GIF mask preview"
       >
-          <section
-            class="flex min-h-112 flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-sm lg:min-h-0"
-            aria-label="GIF mask preview"
-          >
-          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3">
-            <p class="text-xs font-semibold tracking-wide text-ink-3 uppercase">Live page</p>
-            <div class="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                id="gif-pause"
-                class="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-semibold text-ink-2 transition-colors hover:border-accent hover:text-accent-text"
-                aria-pressed="false"
-              >
-                <span data-pause-icon class="inline-flex">
-                  <PauseIcon size={14} />
-                </span>
-                <span data-resume-icon class="inline-flex" hidden>
-                  <PlayIcon size={14} />
-                </span>
-                <span data-label>Pause</span>
-              </button>
-              <button
-                type="button"
-                id="play-btn"
-                class="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-semibold text-ink-2 transition-colors hover:border-accent hover:text-accent-text"
-              >
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3">
+          <p class="text-xs font-semibold tracking-wide text-ink-3 uppercase">Live page</p>
+          <div class="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              id="gif-pause"
+              class="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-semibold text-ink-2 transition-colors hover:border-accent hover:text-accent-text"
+              aria-pressed="false"
+            >
+              <span data-pause-icon class="inline-flex">
+                <PauseIcon size={14} />
+              </span>
+              <span data-resume-icon class="inline-flex" hidden>
                 <PlayIcon size={14} />
-                Play
-              </button>
-            </div>
+              </span>
+              <span data-label>Pause</span>
+            </button>
+            <button
+              type="button"
+              id="play-btn"
+              class="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-semibold text-ink-2 transition-colors hover:border-accent hover:text-accent-text"
+            >
+              <PlayIcon size={14} />
+              Play
+            </button>
+          </div>
+        </div>
+
+        <div class="relative flex flex-1 items-center justify-center overflow-hidden p-8 sm:p-12">
+          <div
+            class="pointer-events-none absolute inset-0 opacity-40"
+            style="background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 32px 32px;"
+            aria-hidden="true"
+          >
           </div>
 
-          <div class="relative flex min-h-80 flex-1 items-center justify-center overflow-hidden bg-paper p-8 sm:min-h-112 sm:p-12 lg:min-h-0 lg:p-8">
-            <div
-              class="pointer-events-none absolute inset-0 opacity-40"
-              style="background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 32px 32px;"
-              aria-hidden="true"
-            >
-            </div>
-
-            <p
-              id="gif-empty"
-              class="relative z-10 max-w-xs text-center text-sm text-ink-3"
-            >
+          <div class="relative z-10 flex h-[15.375rem] w-full max-w-md items-center justify-center overflow-hidden rounded-2xl border border-line bg-paper shadow-xl">
+            <p id="gif-empty" class="max-w-xs px-6 text-center text-sm text-ink-3">
               Pick a GIF or paste a link to preview it as ink.
             </p>
             <img
               id="gif-stage"
-              class="gif-ink relative z-10 max-h-[min(28rem,65vh)] w-auto max-w-full object-contain"
+              class="gif-ink max-h-full w-auto max-w-full object-contain"
               alt="GIF used as the theme wipe mask"
               decoding="async"
               hidden
             />
             <canvas
               id="gif-stage-canvas"
-              class="gif-ink relative z-10 max-h-[min(28rem,65vh)] w-auto max-w-full object-contain"
+              class="gif-ink max-h-full w-auto max-w-full object-contain"
               role="img"
               aria-label="GIF used as the theme wipe mask"
               hidden
             >
             </canvas>
           </div>
+        </div>
 
-          <div class="flex flex-col gap-4 border-t border-line p-4 lg:hidden">
-            <GifPicker searchId="gif-search" selectedHref={initial.gif} />
-            <GifTiming
-              durationId="ctrl-duration"
-              sizeId="ctrl-size"
-              duration={initial.d}
-              size={initial.size}
-              durations={durations}
-              sizes={sizes}
-              selectClass={selectClass}
-            />
-            <p class="text-xs leading-relaxed text-ink-3">
-              Pick a preset or paste a Tenor, Giphy, or any https URL. Transparency works best as a
-              mask. One GIF for both light and dark.
-            </p>
-          </div>
-        </section>
-
-        <aside class="hidden flex-col gap-4 lg:flex lg:min-h-0 lg:overflow-y-auto">
-          <div class="rounded-2xl border border-line bg-surface p-4">
-            <GifPicker searchId="gif-search-lg" selectedHref={initial.gif} />
-          </div>
-
-          <div class="rounded-2xl border border-line bg-surface p-4">
-            <GifTiming
-              durationId="ctrl-duration-lg"
-              sizeId="ctrl-size-lg"
-              duration={initial.d}
-              size={initial.size}
-              durations={durations}
-              sizes={sizes}
-              selectClass={selectClass}
-            />
-          </div>
-
-          <p class="text-xs leading-relaxed text-ink-3">
-            Pick a preset or paste a Tenor, Giphy, or any https URL. Transparency works best as a
-            mask. One GIF for both light and dark.
-          </p>
-        </aside>
-
-        <div class="overflow-hidden rounded-2xl border border-line bg-surface shadow-sm lg:col-span-2">
-          <div class="border-b border-line bg-inset p-4">
-            <div class="flex min-h-20 items-center gap-3 rounded-xl border border-line bg-surface px-3 py-3">
-              <img id="gif-thumb" class="gif-ink size-12 shrink-0 rounded-lg object-cover" alt="" hidden />
-              <div class="min-w-0 flex-1">
-                <label for="gif-url" class="mb-1.5 block text-[10px] font-semibold tracking-wider text-ink-3 uppercase">
-                  GIF link
-                </label>
-                <div class="relative">
-                  <input
-                    id="gif-url"
-                    class="w-full min-h-10 rounded-lg border border-line bg-paper py-2 pr-10 pl-2.5 font-mono text-xs text-ink placeholder:text-ink-3 focus-visible:border-accent"
-                    type="url"
-                    inputmode="url"
-                    autocomplete="off"
-                    spellcheck="false"
-                    placeholder="https://…/effect.gif"
-                  />
-                  <button
-                    type="button"
-                    id="gif-clear"
-                    class="absolute top-1/2 right-1 inline-flex size-8 -translate-y-1/2 items-center justify-center rounded-md text-ink-3 transition-colors hover:bg-inset hover:text-ink"
-                    aria-label="Remove GIF"
-                    hidden
-                  >
-                    <CloseIcon size={14} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="px-4 py-3">
-            <div class="flex items-start justify-between gap-3">
-              <div class="min-w-0 flex-1">
-                <p class="mb-1 text-[10px] font-semibold tracking-wider text-ink-3 uppercase">
-                  CSS
-                </p>
-                <code
-                  id="class-snippet"
-                  class="block max-h-48 overflow-auto font-mono text-[12px] leading-relaxed whitespace-pre text-ink lg:max-h-40"
-                >
-                  {initialSnippet}
-                </code>
-              </div>
-              <div class="flex shrink-0 flex-col gap-2">
-                <button
-                  type="button"
-                  id="copy-classes"
-                  class="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-full bg-ink px-3 py-1.5 text-xs font-semibold text-paper"
-                >
-                  <CopyIcon size={13} />
-                  <span data-label>Copy</span>
-                </button>
-                <button
-                  type="button"
-                  id="copy-url"
-                  class="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-semibold text-ink-2"
-                >
-                  <span data-label>Share URL</span>
-                </button>
-              </div>
-            </div>
-            <code
-              id="html-snippet"
-              class="mt-2 block overflow-x-auto font-mono text-[12px] leading-relaxed whitespace-pre text-ink-2"
-            >
-              {`if (!document.startViewTransition) switchTheme()
+        <div class="border-t border-line bg-inset px-4 py-3">
+          <div class="flex items-start justify-between gap-3">
+            <div class="min-w-0 flex-1">
+              <p class="mb-1 text-[10px] font-semibold tracking-wider text-ink-3 uppercase">
+                CSS
+              </p>
+              <code
+                id="class-snippet"
+                class="block max-h-48 overflow-auto overscroll-y-contain font-mono text-[12px] leading-relaxed whitespace-pre text-ink scrollbar-thin scrollbar-thumb-accent scrollbar-track-paper"
+              >
+                {initialSnippet}
+              </code>
+              <p class="mt-2 text-[10px] font-semibold tracking-wider text-ink-3 uppercase">
+                Play
+              </p>
+              <code
+                id="html-snippet"
+                class="block overflow-x-auto font-mono text-[12px] leading-relaxed whitespace-pre text-ink-2"
+              >
+                {`if (!document.startViewTransition) switchTheme()
 document.startViewTransition(switchTheme);`}
-            </code>
+              </code>
+            </div>
+            <div class="flex shrink-0 flex-col gap-2 sm:flex-row">
+              <button
+                type="button"
+                id="copy-classes"
+                class="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-full bg-ink px-3 py-1.5 text-xs font-semibold text-paper"
+              >
+                <CopyIcon size={13} />
+                <span data-label>Copy</span>
+              </button>
+              <button
+                type="button"
+                id="copy-url"
+                class="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs font-semibold text-ink-2"
+              >
+                <span data-label>Share URL</span>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-      </div>
+      </section>
+
+      <aside class="flex flex-col gap-4 lg:sticky lg:top-24">
+        <GifPicker selectedHref={initial.gif} />
+        <GifTiming duration={initial.d} size={initial.size} durations={durations} sizes={sizes} />
+
+        <p class="text-xs leading-relaxed text-ink-3">
+          Pick a preset or paste a Tenor, Giphy, or any https URL. Transparency works best as a
+          mask. One GIF for both light and dark.
+        </p>
+      </aside>
     </div>
+  </div>
   </main>
   <Footer />
 </Layout>
@@ -285,11 +209,3 @@ document.startViewTransition(switchTheme);`}
   import { initGifStudio } from '../lib/gif'
   initGifStudio()
 </script>
-
-<style>
-  .effect-option.is-selected {
-    background: color-mix(in oklab, var(--accent) 14%, var(--inset));
-    color: var(--accent-text);
-    font-weight: 600;
-  }
-</style>

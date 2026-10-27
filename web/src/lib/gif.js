@@ -403,13 +403,13 @@ document.startViewTransition(switchTheme);`
   durationSelects.forEach((select) => {
     select.addEventListener('change', () => {
       syncSelects(durationSelects, select.value)
-      refresh()
+      refresh({ play: true })
     })
   })
   sizeSelects.forEach((select) => {
     select.addEventListener('change', () => {
       syncSelects(sizeSelects, select.value)
-      refresh()
+      refresh({ play: true })
     })
   })
 
