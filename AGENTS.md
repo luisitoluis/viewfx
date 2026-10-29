@@ -14,6 +14,7 @@ When **working inside this monorepo**, follow this `AGENTS.md` and the codebase 
 
 Public site agent docs (prefer Markdown over HTML):
 
+- https://viewfx.luismc.dev/llm.txt
 - https://viewfx.luismc.dev/llms.txt
 - https://viewfx.luismc.dev/index.md
 - https://viewfx.luismc.dev/playground.md

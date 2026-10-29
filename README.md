@@ -50,6 +50,12 @@ pnpm add viewfx
 yarn add viewfx
 ```
 
+- bun
+
+```bash
+bun add viewfx
+```
+
 #### Plugin Implementation
 
 > Use the plugin in your Tailwind CSS project:

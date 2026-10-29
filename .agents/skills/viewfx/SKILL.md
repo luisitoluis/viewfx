@@ -47,6 +47,7 @@ Help the user **use** the [`viewfx`](https://www.npmjs.com/package/viewfx) packa
 npm install viewfx
 # pnpm add viewfx
 # yarn add viewfx
+# bun add viewfx
 ```
 
 Tailwind CSS **v4** — CSS import only. Do not also register a JS plugin.
@@ -138,6 +139,7 @@ GIF studio (record a toggle, not required to ship the effect): https://viewfx.lu
 
 Prefer Markdown over scraping HTML:
 
+- https://viewfx.luismc.dev/llm.txt
 - https://viewfx.luismc.dev/llms.txt
 - https://viewfx.luismc.dev/index.md
 - https://viewfx.luismc.dev/playground.md

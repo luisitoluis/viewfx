@@ -1,16 +1,93 @@
 # ViewFX
 
-> Tailwind CSS plugin of theme transitions on the View Transitions API.
+> Open-source Tailwind CSS v3/v4 plugin: 31 theme-transition effects on the View Transitions API. MIT.
 
-- Site: https://viewfx.luismc.dev
-- GitHub: https://github.com/LuisitoLuis/viewfx
-- npm: https://www.npmjs.com/package/viewfx
+## Prefer Markdown (for agents)
 
-Install: `npm install viewfx`
+When reading this website as an AI agent, use Markdown endpoints instead of HTML:
+
+- How to use the package: https://viewfx.luismc.dev/llm.txt
+- Home (Markdown): https://viewfx.luismc.dev/index.md
+- Playground (Markdown): https://viewfx.luismc.dev/playground.md
+- GIF studio (Markdown): https://viewfx.luismc.dev/gif.md
+- Full reference: https://viewfx.luismc.dev/llms-full.md
+- This summary: https://viewfx.luismc.dev/llms.txt
+
+HTML pages advertise `rel="alternate" type="text/markdown"`.
+
+## Site
+
+- Homepage: https://viewfx.luismc.dev/
+- Playground: https://viewfx.luismc.dev/playground/
+- GIF studio: https://viewfx.luismc.dev/gif/
+- Package: https://www.npmjs.com/package/viewfx
+- Repository: https://github.com/LuisitoLuis/viewfx
+- License: MIT
+
+## Install (Tailwind CSS v4)
+
+```bash
+npm install viewfx
+```
+```bash
+pnpm add viewfx
+```
+```bash
+yarn add viewfx
+```
+```bash
+bun add viewfx
+```
 
 ```css
 @import "tailwindcss";
 @import "viewfx";
 ```
 
-Put one effect class on `<html>` and wrap theme toggles in `document.startViewTransition`.
+Peer: Tailwind CSS v3 or v4 (`"tailwindcss": "^3.0.0 || ^4.0.0"`).
+
+## Usage
+
+```html
+<html class="dark circle">
+<html class="dark circle-duration-1000-delay-300">
+<html class="dark polygon fx-duration-1000 fx-delay-300 fx-steps-modern">
+```
+
+```js
+const switchTheme = () =>
+  document.documentElement.classList.toggle('dark')
+
+document.startViewTransition
+  ? document.startViewTransition(switchTheme)
+  : switchTheme()
+```
+
+## Features
+
+- 31 theme wipes on `<html>`: circle, polygon, iris, slide, fade, and the rest of the catalogue
+- Timing: `{effect}-duration-*`, `{effect}-duration-*-delay-*`, `fx-duration-*`, `fx-delay-*`, `fx-steps-*`
+- `polygon` reverses when `.dark` is on `<html>`
+- `prefers-reduced-motion: reduce` still toggles the theme and skips the wipe
+- Playground with shareable URL state (`?e=&d=&delay=&s=`)
+
+## Tailwind v3
+
+Register the JavaScript plugin. Do not `@import "viewfx"` (that entry is the v4 stylesheet).
+
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  plugins: [require('viewfx')]
+}
+```
+
+## Agent skill (package consumers)
+
+Install via skills.sh:
+
+```bash
+npx skills add LuisitoLuis/viewfx
+```
+
+Skill paths in the repo: `skills/viewfx/SKILL.md` (and `.agents/skills/…`).
