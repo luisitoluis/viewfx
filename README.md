@@ -71,6 +71,10 @@ module.exports = {
 }
 ```
 
+## Agent skill
+
+For coding agents in a consumer app: `npx skills add LuisitoLuis/viewfx`
+
 ## Usage :gear:
 
 #### Example

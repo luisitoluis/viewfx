@@ -1,5 +1,24 @@
 # AGENTS.md
 
+## Skills (skills.sh)
+
+The **`viewfx` skill is for package consumers** (people using the npm package in their apps), not for contributing to this monorepo.
+
+- Paths (identical copies for discovery):
+  - `skills/viewfx/SKILL.md`
+  - `.agents/skills/viewfx/SKILL.md`
+- Install elsewhere: `npx skills add LuisitoLuis/viewfx`
+- Badge: https://skills.sh/LuisitoLuis/viewfx
+
+When **working inside this monorepo**, follow this `AGENTS.md` and the codebase (especially `src/index.css` and `src/effects.cjs`). Do not treat the consumer skill as contributor docs. If you change the public class API, update both skill copies so they stay byte-identical.
+
+Public site agent docs (prefer Markdown over HTML):
+
+- https://viewfx.luismc.dev/llms.txt
+- https://viewfx.luismc.dev/index.md
+- https://viewfx.luismc.dev/playground.md
+- https://viewfx.luismc.dev/llms-full.md
+
 ## What this is
 
 pnpm workspace with two members: the root package **`viewfx`** (published to npm — a Tailwind CSS v3/v4 plugin for View Transitions theme effects) and **`web/`** (private Astro 7 catalogue site, consumes `viewfx: workspace:*`). Node >= 22.12, pnpm 12.
@@ -105,5 +124,5 @@ The PR template asks for test cases and results.
 ## Other
 
 - Package publish contents are controlled by `"files": ["src"]` in root `package.json` (plus `.npmignore`); `web/`, `scripts/`, `test/` never ship.
-- `.agents/skills/` holds third-party agent skills pinned by `skills-lock.json` — treat as vendored, don't hand-edit.
+- `.agents/skills/` holds third-party agent skills pinned by `skills-lock.json` — treat those as vendored, don't hand-edit. The exception is `.agents/skills/viewfx/`, the consumer skill, which must stay identical to `skills/viewfx/SKILL.md`.
 - Deploy config lives outside the repo (Vercel); there is no deploy workflow to modify.
