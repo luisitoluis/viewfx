@@ -25,6 +25,9 @@
     "type": "git",
     "url": "git+https://github.com/LuisitoLuis/viewfx.git"
   },
+  "bugs": {
+    "url": "https://github.com/LuisitoLuis/viewfx/issues"
+  },
   "homepage": "https://viewfx.luismc.dev",
   "type": "module",
   "scripts": {
@@ -39,6 +42,7 @@
     "theme",
     "plugin"
   ],
+  "author": "Luis Martinez (@luisitoluis)",
   "license": "MIT",
   "engines": {
     "node": ">=22.12.0"
