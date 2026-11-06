@@ -59,7 +59,7 @@
     "@csstools/postcss-minify": "3.0.2",
     "@eslint/js": "10.0.1",
     "@tailwindcss/postcss": "4.3.4",
-    "@typescript-eslint/parser": "8.70.1",
+    "@typescript-eslint/parser": "8.72.1",
     "eslint": "10.11.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-astro": "3.2.1",
