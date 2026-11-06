@@ -67,7 +67,7 @@
     "postcss": "8.5.32",
     "prettier": "3.9.8",
     "prettier-config-standard": "7.0.0",
-    "prettier-plugin-astro": "1.0.1",
+    "prettier-plugin-astro": "1.1.2",
     "prettier-plugin-tailwindcss": "0.8.1",
     "tailwindcss": "4.3.4",
     "tailwindcss-v3": "npm:tailwindcss@3.4.19",
