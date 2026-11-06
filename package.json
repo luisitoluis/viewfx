@@ -71,7 +71,7 @@
     "prettier-plugin-tailwindcss": "0.8.1",
     "tailwindcss": "4.3.4",
     "tailwindcss-v3": "npm:tailwindcss@3.4.19",
-    "typescript": "6.0.3",
+    "typescript": "7.0.2",
     "vitest": "5.1.0"
   }
 }
