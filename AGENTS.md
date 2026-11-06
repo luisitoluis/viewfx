@@ -26,12 +26,15 @@ pnpm workspace with two members: the root package **`viewfx`** (published to npm
 
 ## Commands
 
-- `pnpm test:ci` — the exact command CI runs (`vitest run`, ~2s, 41 tests). Run this before finishing.
+- `pnpm test:ci` — CI runs `pnpm lint` then `pnpm test:ci` (Vitest, ~2s, 41 tests). Run both before finishing.
+- `pnpm lint` / `pnpm lint:fix` — ESLint (flat config, `eslint.config.js`).
+- `pnpm format:check` / `pnpm format` — Prettier (`web/.prettierrc.cjs`, re-exported at `.prettierrc.cjs` for root).
+- `pnpm typecheck` — `tsc -b` (root scripts + `web/` project reference).
 - `pnpm test` — vitest watch mode.
 - Single test file: `pnpm exec vitest run test/index.test.js`; add `-t "name substring"` for one test.
 - `pnpm emit:masks` — regenerates `src/masks.css` from `src/masks.js`. Required after any mask/SVG edit; `src/masks.css` is committed and must not be hand-edited.
 - Site: `pnpm --filter web dev` / `pnpm --filter web build`. Imports inside `web/` use the tsconfig aliases `@components`, `@layouts`, `@data`, `@lib`, `@styles`, and `@root`. Root Vitest resolves the same aliases from `vitest.config.js`.
-- There is **no** lint, format, or typecheck config — don't invent one. CI (`.github/workflows/ci.yml`) does nothing but `pnpm install && pnpm test:ci` on push/PR to `main`.
+- **Lint / format / typecheck:** ESLint + Prettier + TypeScript (see `eslint.config.js`, `web/.prettierrc.cjs`, `tsconfig.json`). CI runs `pnpm install`, `pnpm lint`, and `pnpm test:ci` on push/PR to `main`.
 
 ## Architecture: two hand-synced plugin implementations
 

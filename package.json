@@ -32,6 +32,11 @@
   "type": "module",
   "scripts": {
     "emit:masks": "node scripts/emit-masks.mjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -b",
     "test": "vitest",
     "test:ci": "vitest run"
   },
@@ -52,10 +57,21 @@
   },
   "devDependencies": {
     "@csstools/postcss-minify": "3.0.2",
+    "@eslint/js": "10.0.1",
     "@tailwindcss/postcss": "4.3.4",
+    "@typescript-eslint/parser": "8.70.1",
+    "eslint": "10.11.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-astro": "3.2.1",
+    "globals": "17.12.0",
     "postcss": "8.5.32",
+    "prettier": "3.9.8",
+    "prettier-config-standard": "7.0.0",
+    "prettier-plugin-astro": "1.0.1",
+    "prettier-plugin-tailwindcss": "0.8.1",
     "tailwindcss": "4.3.4",
     "tailwindcss-v3": "npm:tailwindcss@3.4.19",
+    "typescript": "6.0.3",
     "vitest": "5.1.0"
   }
 }

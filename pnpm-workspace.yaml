@@ -7,4 +7,4 @@ allowBuilds:
   sharp: true
 
 onlyBuiltDependencies:
-  - '@tailwindcss/oxide'
+  - "@tailwindcss/oxide"
