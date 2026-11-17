@@ -64,7 +64,7 @@
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-astro": "3.2.1",
     "globals": "17.14.0",
-    "postcss": "8.5.32",
+    "postcss": "8.5.33",
     "prettier": "3.10.1",
     "prettier-config-standard": "7.0.0",
     "prettier-plugin-astro": "1.1.2",
