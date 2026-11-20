@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@csstools/postcss-minify':
-        specifier: 3.0.2
-        version: 3.0.2(postcss@8.5.33)
+        specifier: 3.0.3
+        version: 3.0.3(postcss@8.5.33)
       '@eslint/js':
         specifier: 10.0.1
         version: 10.0.1(eslint@10.15.0(jiti@2.7.0))
@@ -351,12 +351,12 @@ packages:
     resolution: {integrity: sha512-dlT1m5e/0yUL0kRNcQn7yGLVThkgbB0Ga/1AmfDDC/8ik6AIiSf2QLQO2zPYvefsHP0aFgxO93cVLCCfDp7kzQ==}
     engines: {node: '>= 20.12.0'}
 
-  '@csstools/css-tokenizer@4.0.2':
-    resolution: {integrity: sha512-OoKoR0f76dCY666JlcbhmVTs2drYj1GUXZTYTcbUgJjh9Nv41aFfZ21bPQTERm5+L5cBDo466NltB2lplS5GBw==}
+  '@csstools/css-tokenizer@4.0.3':
+    resolution: {integrity: sha512-gdkFe/Z4KU1q8Y5S3GYScXGcOnO56dgWwIs5+97Ij1VIKISItOIUlCXUq4VLbdnRclF+SSQ49sLsn3KeV111AA==}
     engines: {node: '>=20.19.0'}
 
-  '@csstools/postcss-minify@3.0.2':
-    resolution: {integrity: sha512-odEq+QOSxHcK5brCUayjca70jWcnWxrgTM9Lc0j0ALTBxRGNkL/rgTyFNbHGLBhrbWe8i8KV5EMGN7p7X34uOg==}
+  '@csstools/postcss-minify@3.0.3':
+    resolution: {integrity: sha512-jFbMv3Lq4wrfw4LTAX2us0lpMgYZU99KZalnnVH3QtbEM6tm9Ckowy2UIsyz4U7SWFEUFKNKGh5XA8iWSfxbpw==}
     engines: {node: '>=20.19.0'}
     peerDependencies:
       postcss: ^8.4
@@ -2766,11 +2766,11 @@ snapshots:
       fast-wrap-ansi: 0.2.2
       sisteransi: 1.0.5
 
-  '@csstools/css-tokenizer@4.0.2': {}
+  '@csstools/css-tokenizer@4.0.3': {}
 
-  '@csstools/postcss-minify@3.0.2(postcss@8.5.33)':
+  '@csstools/postcss-minify@3.0.3(postcss@8.5.33)':
     dependencies:
-      '@csstools/css-tokenizer': 4.0.2
+      '@csstools/css-tokenizer': 4.0.3
       postcss: 8.5.33
 
   '@emnapi/core@1.11.1':
